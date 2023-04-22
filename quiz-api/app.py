@@ -1,11 +1,17 @@
 from flask import Flask
 from flask_cors import CORS
+
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
+
 @app.route('/')
 def hello_world():
-	x = 'world'
-	return f"Salut, {x}"
+    name = 'world'
+    return f"Hello, {name}"
+
+@app.route('/quiz-info', methods=['GET'])
+def GetQuizInfo():
+	return {"size": 0, "scores": []}, 200
 
 if __name__ == "__main__":
     app.run()
