@@ -31,6 +31,24 @@ export default {
     return this.call('get', 'quiz-info')
   },
   getQuestion(position) {
-    // not implemented
+    return this.call("get", `questions?position=${position}`);
+  },
+  getPlayersData() {
+    return this.call("get", 'players');
+  },
+  async setNewPlayer(player){
+    return this.call("post", "participations", player);
+  },
+  async login(password) {
+    return this.call("post", "login", password);
+  },
+  async deleteQuestion(id, token){
+    return this.call("delete", `questions/${id}`, null, token);
+  },
+  async updateQuestion(id, data, token){
+    return this.call("put", `questions/${id}`, data, token);
+  },
+  async addQuestion(data, token) {
+    return this.call("post", "questions", data, token);
   }
 }

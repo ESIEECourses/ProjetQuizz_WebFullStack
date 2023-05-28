@@ -1,9 +1,14 @@
 <template>
-  <h1>Home page</h1>
-  <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date">
-    {{ scoreEntry.playerName }} - {{ scoreEntry.score }}
+  <div class="d-flex flex-column align-content-between" style="width: 60%">
+    <div class="center">
+      <h1 class="title"> Welcome to our Mario Quiz !</h1>
+      <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date" class="home-text">
+        {{ scoreEntry.name }} - {{ scoreEntry.score }}
+      </div>
+      <router-link class="button btn-small" to="/quiz">Begin quiz !</router-link>
+    </div>
+    
   </div>
-  <router-link to="/quiz">Démarrer le quiz !</router-link>
 </template>
 
 <script>
@@ -17,11 +22,38 @@ export default {
     };
   },
   async created() {
-    registeredScores = await quizApiService.getQuizInfo();
+    const info = await quizApiService.getQuizInfo();
+    if (info.status !== 200) console.log("ERROR : CAN'T LOAD DATA !");
+  
+    this.registeredScores = info.data.scores;
   }
 };
+
 </script>
 
-<style>
+<style>  
+  .title{
+    font-family: "Super Mario";
+    color: white;
+    font-weight: bold;
+    text-shadow: -1px -1px white, 1px 1px black;
+    margin-bottom: 10%;
+  }
 
+  .center {
+    text-align: center;
+  }
+
+  .btn-small {
+    width: 60% !important
+  }
+
+  .home-text {
+    font-family: "Super Mario";
+    font-weight: regular;
+    color: white;
+    text-shadow: -1px -1px white, 1px 1px black;
+    font-size: 25px;
+    margin-bottom: 5%
+  } 
 </style>

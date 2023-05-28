@@ -1,7 +1,7 @@
 import jwt
 import datetime
 from werkzeug.exceptions import Unauthorized
-
+from flask import request
 
 class JwtError(Exception):
     """Exception raised for jwt errors in the quiz app 
@@ -27,6 +27,7 @@ def build_token():
             'iat': datetime.datetime.utcnow(),
             'sub': 'quiz-app-admin'
         }
+
         return jwt.encode(
             payload,
             secret,
@@ -50,3 +51,14 @@ def decode_token(auth_token):
         raise JwtError('Signature expired. Please log in again.')
     except jwt.InvalidTokenError as e:
         raise JwtError('Invalid token. Please log in again.')
+
+def isLoggedIn():
+    if (request.headers.get('Authorization')):
+        try:
+            decode_token(request.headers.get('Authorization')[7:])
+            return True;
+        except JwtError as err:
+            print(err)
+            return False
+    
+    return False

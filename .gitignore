@@ -28,5 +28,7 @@ coverage
 *.sw?
 
 # api
-venv
-__pycache__
+quiz-api/venv
+quiz-api/__pycache__
+quiz-api/.vscode/
+quiz-api/QuizDB.db

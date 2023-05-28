@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
-import QuizPage from '../views/QuizPage.vue'
+import QuizPage from '../views/quiz/QuizPage.vue'
+import QuestionManager from '../views/quiz/QuestionManager.vue'
+import ScoreDisplay from '../views/quiz/ScoreDisplay.vue'
+import AdminLogin from '../views/admin/AdminLogin.vue'
+import AdminPanel from '../views/admin/AdminPanel.vue'
+import AdminDetailQuestion from '../views/admin/AdminDetailQuestion.vue'
+import AdminEditQuestion from '../views/admin/AdminEditQuestion.vue'
+import AdminAddQuestion from '../views/admin/AdminAddQuestion.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,12 +23,39 @@ const router = createRouter({
       component: QuizPage
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/questions',
+      name: 'questions',
+      component: QuestionManager
+    },
+    {
+      path: '/scoreboard',
+      name: 'scoreboard',
+      component: ScoreDisplay
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminLogin
+    },
+    {
+      path: '/admin-panel',
+      name: 'adminPanel',
+      component: AdminPanel
+    },
+    {
+      path: '/detail-question',
+      name: 'detailQuestion',
+      component: AdminDetailQuestion
+    },
+    {
+      path: '/edit-question',
+      name: 'editQuestion',
+      component: AdminEditQuestion
+    },
+    {
+      path: '/new-question',
+      name: 'addQuestion',
+      component: AdminAddQuestion
     }
   ]
 })
