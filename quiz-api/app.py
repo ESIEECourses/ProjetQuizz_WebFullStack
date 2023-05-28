@@ -4,18 +4,29 @@ from flask_cors import CORS
 from flask import Flask, request
 
 # import utils functions
-from src.jwt_utils import build_token
-from src.jwt_utils import isLoggedIn
+from jwt_utils import build_token
+from jwt_utils import isLoggedIn
 
 # import module to hash pwd
 import hashlib
 
 # import others modules
-import src.question as question
-import src.player as player
+import question
+import player 
+import database 
 
 app = Flask(__name__)
 CORS(app)
+
+#########################################
+# rebuild DB
+#########################################
+@app.route('/rebuild-db', methods=['POST'])
+def rebuildDB():
+     if (isLoggedIn()):
+          return database.create_database()
+     else:
+          return 'Unauthorized', 401
 
 #########################################
 # handle /quiz-info get request

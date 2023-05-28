@@ -1,12 +1,9 @@
 from model import Answer
 from model import Question
-from . import answer as AnswerManager
+import answer as AnswerManager
 import sqlite3
-import sys
-from pathlib import Path
 from flask import jsonify
-sys.path.append('..')
-
+from pathlib import Path
 
 def getConnection():
     conn = sqlite3.connect(Path(__file__).parent.resolve() / "QuizDB.db")

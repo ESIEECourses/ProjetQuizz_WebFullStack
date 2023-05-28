@@ -1,6 +1,6 @@
 import sqlite3
-from pathlib import Path
 from flask import jsonify
+from pathlib import Path
 
 def getConnection():
 	conn = sqlite3.connect(Path(__file__).parent.resolve() / "QuizDB.db")
