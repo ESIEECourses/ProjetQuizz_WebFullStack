@@ -19,24 +19,6 @@ app = Flask(__name__)
 CORS(app)
 
 #########################################
-# rebuild DB
-#########################################
-@app.route('/rebuild-db', methods=['POST'])
-def rebuildDB():
-     if (isLoggedIn()):
-          return database.create_database()
-     else:
-          return 'Unauthorized', 401
-
-#########################################
-# handle /quiz-info get request
-#########################################
-@app.route('/quiz-info', methods=['GET'])
-def GetQuizInfo():
-    return question.getQuizInfo()
-
-
-#########################################
 # Login the user - Admin access
 #########################################
 @app.route('/login', methods=['POST'])
@@ -50,6 +32,43 @@ def Login():
         return { "token": build_token()}, 200
     else:
         return 'Unauthorized', 401
+
+#########################################
+# rebuild DB
+#########################################
+@app.route('/rebuild-db', methods=['POST'])
+def rebuildDB():
+     if (isLoggedIn()):
+          return database.create_database()
+     else:
+          return 'Unauthorized', 401
+
+#########################################
+# delete all players
+#########################################
+@app.route('/participations/all', methods=['DELETE'])
+def deleteAllPlayers():
+    if (isLoggedIn()):
+        return player.deleteAll()
+    else:
+        return 'Unauthorized', 401
+
+#########################################
+# delete all questions
+#########################################
+@app.route('/questions/all', methods=['DELETE'])
+def deleteAllQuestions():
+    if (isLoggedIn()):
+        return question.deleteAll()
+    else:
+        return 'Unauthorized', 401
+
+#########################################
+# handle /quiz-info get request
+#########################################
+@app.route('/quiz-info', methods=['GET'])
+def GetQuizInfo():
+    return question.getQuizInfo()
 
 #########################################
 # if User is logged
@@ -75,7 +94,7 @@ def getQuestionByID(id):
 @app.route('/questions', methods=['GET'])
 def getQuestionByPosition():   
     if (request.args.get('position') == None):
-        return 'arg \'position\' is missing', 400
+        return 'error : you need to give a position !', 404
     
     return question.getQuestionByPosition(request.args.get('position'))
 

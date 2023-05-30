@@ -18,6 +18,7 @@ def create_database():
                         "value"	TEXT NOT NULL,
                         "correct"	INTEGER NOT NULL DEFAULT 0,
                         "questionID"	INTEGER NOT NULL,
+                        "pos"   integer,
                         FOREIGN KEY("questionID") REFERENCES "Question"("id"),
                         PRIMARY KEY("id")
                         )''')
@@ -34,7 +35,7 @@ def create_database():
                             "title"	TEXT NOT NULL,
                             "text"	TEXT NOT NULL,
                             "img"	TEXT NOT NULL,
-                            "pos"	INTEGER NOT NULL UNIQUE,
+                            "pos"	INTEGER NOT NULL,
                             PRIMARY KEY("id")
                         )''')
              
