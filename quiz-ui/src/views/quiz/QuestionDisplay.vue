@@ -1,7 +1,7 @@
 <template>
     <h1 class ="form-title mb-5 font-12"> {{ question.title }} </h1>
     <h3 class="sub-title mb-5"> {{ question.text }}   </h3>
-    <img v-if="question.image" :src="question.image" >
+    <img v-if="question.image" :src="question.image" class="img-quiz" >
     <div class="text d-flex flex-column align-items-center">
         <div class="form-check" v-for="(answer, idx) in question.possibleAnswers" :key="idx">
             <input class="form-check-input" type="radio" name="radio" @change="onChecked(idx)"/>
@@ -80,5 +80,10 @@
 
   .font-12 {
     font-size: 12px
+  }
+
+  .img-quiz {
+    max-width: 300px;
+    margin-bottom: 2%
   }
 </style>

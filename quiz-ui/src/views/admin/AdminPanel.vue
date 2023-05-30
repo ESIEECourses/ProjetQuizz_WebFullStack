@@ -50,7 +50,7 @@
                     return
                 }
                 
-                this.questions[pos - 1] = questionInfo.data[0];
+                this.questions[pos - 1] = questionInfo.data;
             },
             getDetail(data) {
                 this.$router.push({ name: "detailQuestion", query: { data } });

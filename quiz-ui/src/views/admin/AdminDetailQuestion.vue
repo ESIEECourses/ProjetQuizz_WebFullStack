@@ -54,12 +54,12 @@
             const questionInfo = await quizApiService.getQuestion(this.$route.query.data);
             if (questionInfo.status !== 200) console.log("ERROR: CAN'T GET QUESTION INFO");
 
-            this.id = questionInfo.data[0].id;
-            this.title = questionInfo.data[0].title;
-            this.text = questionInfo.data[0].text;
-            this.position = questionInfo.data[0].position;
-            this.image = questionInfo.data[0].image;
-            this.answers = questionInfo.data[0].possibleAnswers;
+            this.id = questionInfo.data.id;
+            this.title = questionInfo.data.title;
+            this.text = questionInfo.data.text;
+            this.position = questionInfo.data.position;
+            this.image = questionInfo.data.image;
+            this.answers = questionInfo.data.possibleAnswers;
         },
         methods: {
             async deleteQuestion() {

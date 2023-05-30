@@ -2,8 +2,8 @@
   <div class="d-flex flex-column align-content-between" style="width: 60%">
     <div class="center">
       <h1 class="title"> Welcome to our Mario Quiz !</h1>
-      <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date" class="home-text">
-        {{ scoreEntry.name }} - {{ scoreEntry.score }}
+      <div v-for="scoreEntry in registeredScores.slice(0,3)" v-bind:key="scoreEntry.date" class="home-text">
+        {{ scoreEntry.playerName }} - {{ scoreEntry.score }}
       </div>
       <router-link class="button btn-small" to="/quiz">Begin quiz !</router-link>
     </div>

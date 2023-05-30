@@ -40,11 +40,11 @@
             async loadQuestionByPos(position) {
                 const question = await quizApiService.getQuestion(position);
                 if (question.status !== 200) console.log("ERROR : CAN'T LOAD DATA !");
-                this.currentData = question.data[0]
+                this.currentData = question.data
             },
 
             answerClickedHandler(answer) {
-                if (this.isCorrect(answer)) this.player.score += 10;
+                if (this.isCorrect(answer)) this.player.score += 1;
 
                 this.isEnd(this.currentPosition).then((isEnd) =>  {
                     if (isEnd) {

@@ -12,11 +12,11 @@ import { RouterLink, RouterView } from 'vue-router'
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li :class="[this.$router.currentRoute.value.path == '/admin-panel' || this.$router.currentRoute.value.path ==  '/new-question' || this.$router.currentRoute.value.path ==  '/detail-question' || this.$router.currentRoute.value.path ==  '/edit-question'  ? 'hide' : 'nav-item active']">
-            <a class="nav-link" href="/admin">Admin</a>
-          </li>
-          <li :class="[this.$router.currentRoute.value.path == '/admin-panel' || this.$router.currentRoute.value.path ==  '/new-question' || this.$router.currentRoute.value.path ==  '/detail-question' || this.$router.currentRoute.value.path ==  '/edit-question' ? 'nav-item active' : 'hide']">
-            <a class="nav-link" href="/">Log out</a>
+          <li :class="[isAdmin ? 'hide' : 'nav-item active']">
+            <router-link  class="nav-link" to="/admin">Admin</router-link>
+          </li> 
+          <li :class="[isAdmin ? 'nav-item active' : 'hide']">
+            <router-link  class="nav-link" to="/">Log out</router-link>
           </li>
         </ul>
       </div>
@@ -26,6 +26,24 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterView/>
   </div>
 </template>
+
+<script>
+  export default {
+    name: "App",  
+    computed: {
+      isAdmin() {
+        if (this.$router.currentRoute.value.path == '/admin-panel'   || 
+            this.$router.currentRoute.value.path ==  '/new-question' || 
+            this.$router.currentRoute.value.path ==  '/detail-question' || 
+            this.$router.currentRoute.value.path ==  '/edit-question') {
+              return true;
+            }
+        return false;   
+      }
+    }
+    
+  }
+</script>
 
 <style scoped>
   .mt-10 {
